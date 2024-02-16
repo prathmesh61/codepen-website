@@ -16,8 +16,9 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
+body,
+html {
+  color: whitesmoke;
   background: linear-gradient(
       to bottom,
       transparent,
@@ -30,4 +31,13 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.collapsed {
+  flex-grow: 0;
+}
+.collapsed.active {
+  position: absolute;
+  left: 100px;
+  top: 0;
 }

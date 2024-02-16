@@ -1,34 +1,31 @@
 "use client";
-import React, { Dispatch, SetStateAction, useCallback } from "react";
+import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
+// @ts-ignore
 import { tags as t } from "@lezer/highlight";
-import {
-  loadLanguage,
-  langNames,
-  langs,
-} from "@uiw/codemirror-extensions-langs";
-import { dracula, draculaInit } from "@uiw/codemirror-theme-dracula";
+import { loadLanguage } from "@uiw/codemirror-extensions-langs";
+import { draculaInit } from "@uiw/codemirror-theme-dracula";
 type Props = {
   language: any;
   displayName: string;
   value: string;
   onChange: Dispatch<SetStateAction<string>>;
 };
-console.log("langNames:", typeof langNames);
 const Editor = ({ displayName, language, onChange, value }: Props) => {
+  const [open, setOpen] = useState<boolean>(true);
   const handleChange = useCallback((val: string, viewUpdate: Object) => {
     onChange(val);
   }, []);
+
   return (
-    <div className="editor-container">
-      <div className="editor-title">
+    <div className={` w-full h-full collapsed ${open ? "" : "active"}`}>
+      <div className="flex gap-10">
         {displayName}
-        <button>O-C</button>
+        <button onClick={() => setOpen((prev) => !prev)}>O-C</button>
       </div>
       <CodeMirror
         value={value}
-        height="200px"
+        height="350px"
         extensions={[loadLanguage(language)!]}
         onChange={handleChange}
         theme={draculaInit({
