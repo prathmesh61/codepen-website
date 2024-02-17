@@ -14,13 +14,14 @@ const EditorPanel = () => {
 
   const srcDoc = `
   <html>
-    <body>${html}</body>
     <style>${css}</style>
+    <body>${html}</body>
     <script>${js}</script>
   </html>
 `;
+
   return (
-    <div className="flex flex-col w-full h-full gap-8  ">
+    <div className="flex flex-col w-full h-[calc(100%-50px)] gap-8  ">
       <ResizablePanelGroup direction="vertical">
         <ResizablePanel defaultSize={70}>
           <ResizablePanelGroup

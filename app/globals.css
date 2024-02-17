@@ -71,3 +71,10 @@
     background-color: #3c3e4b;
   }
 }
+
+.bg {
+  background-image: url("https://uploads-ssl.webflow.com/646238196be0860387109ec5/64758f4a591b8cffd54a2be5_Lines-Down.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

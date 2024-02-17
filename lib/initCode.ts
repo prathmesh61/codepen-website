@@ -103,7 +103,7 @@ body {
   display: grid;
   place-content: center;
   font-family: system-ui;
-  background: #e08e79;
+  background: #0E1525;
 }
 `;
 export const jsCode: string = `this is javascript code`;
