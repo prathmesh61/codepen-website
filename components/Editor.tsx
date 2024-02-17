@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
+import React, { Dispatch, SetStateAction, useCallback } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 // @ts-ignore
 import { tags as t } from "@lezer/highlight";
@@ -10,18 +10,20 @@ type Props = {
   language: any;
   displayName: string;
   value: string;
-  onChange: Dispatch<SetStateAction<string>>;
+  onChange: (val: string) => void;
 };
 const Editor = ({ displayName, language, onChange, value }: Props) => {
-  const [open, setOpen] = useState<boolean>(true);
   const handleChange = useCallback((val: string, viewUpdate: Object) => {
     onChange(val);
   }, []);
-
+  const color =
+    (displayName === "HTML" && "bg-orange-400 text-black p-1") ||
+    (displayName === "CSS" && "bg-blue-400 text-black p-1") ||
+    (displayName === "JS" && "bg-yellow-400 text-black p-1");
   return (
     <div className={`w-full h-full`}>
-      <span className="font-bold bg-[#3c3e4b] text-white/45 px-4 text-sm flex items-center gap-1">
-        <Code height={20} width={20} />
+      <span className="font-bold bg-[#3c3e4b] text-white/45 px-4 text-sm flex items-center gap-2">
+        <Code height={20} width={20} className={`${color}`} />
         {displayName}
       </span>
       <CodeMirror

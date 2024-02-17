@@ -1,16 +1,17 @@
 "use client";
-import React, { useState } from "react";
 import Editor from "./Editor";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { useStore } from "@/store/store";
 
 const EditorPanel = () => {
-  const [html, setHtml] = useState("");
-  const [css, setCss] = useState("");
-  const [js, setJs] = useState("");
+  const { css, html, js, updateCss, updateHtml, updatejs } = useStore(
+    (state) => state
+  );
+
   const srcDoc = `
   <html>
     <body>${html}</body>
@@ -21,17 +22,17 @@ const EditorPanel = () => {
   return (
     <div className="flex flex-col w-full h-full gap-8  ">
       <ResizablePanelGroup direction="vertical">
-        <ResizablePanel>
+        <ResizablePanel defaultSize={70}>
           <ResizablePanelGroup
             direction="horizontal"
             className="flex w-full h-full "
           >
-            <ResizablePanel defaultSize={50}>
+            <ResizablePanel>
               <Editor
                 language="html"
                 displayName="HTML"
                 value={html}
-                onChange={setHtml}
+                onChange={updateHtml}
               />
             </ResizablePanel>
             <ResizableHandle />
@@ -40,7 +41,7 @@ const EditorPanel = () => {
                 language="css"
                 displayName="CSS"
                 value={css}
-                onChange={setCss}
+                onChange={updateCss}
               />
             </ResizablePanel>
             <ResizableHandle />
@@ -49,7 +50,7 @@ const EditorPanel = () => {
                 language="javascript"
                 displayName="JS"
                 value={js}
-                onChange={setJs}
+                onChange={updatejs}
               />
             </ResizablePanel>
           </ResizablePanelGroup>
