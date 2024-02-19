@@ -21,5 +21,5 @@ const codeSchema = new mongoose.Schema<SchemaType>(
   { timestamps: true }
 );
 
-const Code = mongoose.model("Code", codeSchema);
+const Code = mongoose.models.Code || mongoose.model("Code", codeSchema);
 export default Code;
