@@ -1,12 +1,11 @@
 "use client";
-import React, { Dispatch, SetStateAction, useCallback } from "react";
+import React, { useCallback } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 // @ts-ignore
 import { tags as t } from "@lezer/highlight";
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 import { draculaInit } from "@uiw/codemirror-theme-dracula";
 import { Code } from "lucide-react";
-import { langBgColor } from "@/lib/utils";
 type Props = {
   language: any;
   displayName: string;
@@ -17,7 +16,10 @@ const Editor = ({ displayName, language, onChange, value }: Props) => {
   const handleChange = useCallback((val: string) => {
     onChange(val);
   }, []);
-  const color = langBgColor(displayName);
+  const color =
+    (displayName === "HTML" && "bg-orange-400 text-black p-1") ||
+    (displayName === "CSS" && "bg-blue-400 text-black p-1") ||
+    (displayName === "JS" && "bg-yellow-400 text-black p-1");
 
   return (
     <div className={`w-full h-full`}>
@@ -27,7 +29,7 @@ const Editor = ({ displayName, language, onChange, value }: Props) => {
       </span>
       <CodeMirror
         value={value}
-        height="100%"
+        height="500px"
         extensions={[loadLanguage(language)!]}
         onChange={handleChange}
         theme={draculaInit({

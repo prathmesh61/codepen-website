@@ -14,8 +14,8 @@ const EditorPanel = () => {
 
   const srcDoc = `
   <html>
-    <style>${css}</style>
-    <body>${html}</body>
+   <body>${html}</body>
+   <style>${css}</style>
     <script>${js}</script>
   </html>
 `;

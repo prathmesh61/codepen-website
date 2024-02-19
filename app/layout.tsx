@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { ClerkProvider } from "@clerk/nextjs";
 import { Montserrat } from "next/font/google";
 
 const font = Montserrat({
@@ -21,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <ClerkProvider>
+        <body className={font.className}>{children}</body>
+      </ClerkProvider>
     </html>
   );
 }
