@@ -28,8 +28,8 @@ const HelperNav: React.FC = () => {
         },
       });
       const data: UserData = await res.data;
-      console.log(data);
-      router.push(`/code/${data._id}`);
+      router.push("/");
+      router.refresh();
     } catch (error) {
       console.log("Error white saving code", error);
     }
@@ -52,12 +52,18 @@ const HelperNav: React.FC = () => {
         onChange={(e) => setProjectName(e.target.value)}
       />
       <div className="flex items-center">
-        <button
-          className="bg-green-500 text-white rounded-md text-sm px-4 py-1"
-          onClick={saveCode}
-        >
-          Save
-        </button>
+        {email ? (
+          <button
+            className="bg-green-500 text-white rounded-md text-sm px-4 py-1"
+            onClick={saveCode}
+          >
+            Save
+          </button>
+        ) : (
+          <Link href={"/sign-in"} className="text-sm font-mono text-white">
+            sign up to save code
+          </Link>
+        )}
       </div>
     </div>
   );

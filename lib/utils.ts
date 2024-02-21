@@ -12,3 +12,5 @@ export const langBgColor = (displayName: string) => {
     (displayName === "JS" && "bg-yellow-400 text-black p-1")
   );
 };
+
+export const PORT = "http://localhost:3007";

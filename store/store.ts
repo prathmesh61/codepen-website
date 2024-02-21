@@ -1,6 +1,5 @@
 import { cssCode, htmlCode, jsCode } from "@/lib/initCode";
 import { create } from "zustand";
-
 type State = {
   html: string;
   css: string;
