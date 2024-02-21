@@ -7,7 +7,8 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { useStore } from "@/store/store";
-import { useEffect } from "react";
+import axios from "axios";
+import { useCallback, useEffect } from "react";
 interface UserData {
   createdAt: string; // Assuming ISO 8601 date-time format
   email: string;
@@ -24,20 +25,27 @@ const CodePage = ({ params }: { params: { id: string } }) => {
   const { css, html, js, updateCss, updateHtml, updatejs } = useStore(
     (state) => state
   );
-  useEffect(() => {
-    const handleFetch = async () => {
-      try {
-        const data = await fetch(`/api/share-code/${params.id}`);
-        const res: UserData = await data.json();
-        updateHtml(res.fullCode.html);
-        updateCss(res.fullCode.css);
-        updatejs(res.fullCode.js);
-      } catch (error) {
-        console.log("Error while featching data", error);
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await axios.get(`/api/share-code/${params.id}`);
+      if (response.statusText === "error") {
+        throw new Error(
+          `Failed to fetch data: ${response.status} ${response.statusText}`
+        );
       }
-    };
-    handleFetch();
-  }, [params.id]);
+      const res: UserData = response.data;
+      updateHtml(res.fullCode.html);
+      updateCss(res.fullCode.css);
+      updatejs(res.fullCode.js);
+    } catch (error) {
+      console.error("Error while fetching data", error);
+      // Handle error state here, such as displaying an error message to the user
+    }
+  }, [params.id, updateHtml, updateCss, updatejs]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
   const srcDoc = `
   <html>
    <body>${html}</body>
