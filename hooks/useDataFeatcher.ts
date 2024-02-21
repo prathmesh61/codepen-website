@@ -33,9 +33,7 @@ const useDataFetcher = <T>(url: string): FetchState<T> => {
     fetchData();
 
     // Cleanup function
-    return () => {
-      // You can perform cleanup if needed
-    };
+    return () => {};
   }, [url]);
 
   return { data, loading, error };

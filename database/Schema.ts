@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 type SchemaType = {
+  projectName: string;
   email: string;
   fullCode: {
     html: string;
@@ -11,6 +12,7 @@ type SchemaType = {
 
 const codeSchema = new mongoose.Schema<SchemaType>(
   {
+    projectName: { type: String, required: true },
     email: { type: String, required: true },
     fullCode: {
       html: { type: String, required: true },

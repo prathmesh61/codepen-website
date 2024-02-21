@@ -6,6 +6,7 @@ import { z } from "zod";
 // creating a schema for strings and type
 type BodyType = {
   email: string;
+  projectName: string;
   fullCode: {
     html: string;
     css: string;
@@ -14,6 +15,7 @@ type BodyType = {
 };
 const bodySchema = z.object({
   email: z.string().email(),
+  projectName: z.string(),
   fullCode: z.object({
     html: z.string(),
     css: z.string(),
@@ -30,6 +32,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   try {
     const code = await Code.create({
       email: validation.data.email,
+      projectName: validation.data.projectName,
       fullCode: {
         html: validation.data.fullCode.html,
         css: validation.data.fullCode.css,
