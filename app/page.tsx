@@ -1,3 +1,4 @@
+import Cards from "@/components/Cards";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
@@ -21,6 +22,10 @@ export default function Home() {
         >
           Code in HTML, CSS, JAVASCRIPT
         </Link>
+      </div>
+      <div className="h-full w-full flex flex-col bg-[#0E1525] p-3">
+        <h2 className="text-center font-bold text-2xl">All Repositories</h2>
+        <Cards />
       </div>
     </div>
   );

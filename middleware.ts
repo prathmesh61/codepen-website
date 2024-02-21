@@ -6,6 +6,7 @@ export default authMiddleware({
     "/anyone-can-visit-this-route",
     "/api/save-code",
     "/api/share-code/:id",
+    "/api/all-repos",
   ],
   // Routes that can always be accessed, and have
   // no authentication information

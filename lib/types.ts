@@ -1,6 +1,7 @@
 export interface UserData {
   createdAt: string; // Assuming ISO 8601 date-time format
   email: string;
+  projectName: string;
   fullCode: {
     css: string;
     html: string;
