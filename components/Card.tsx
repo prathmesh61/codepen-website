@@ -34,7 +34,9 @@ const Card = ({ item }: Props) => {
       <div className="mx-2 my-1 flex justify-between items-center">
         <div className="">
           <h4 className="font-bold text-base font-mono">{item.projectName}</h4>
-          <h6 className="font-medium text-xs">{item.email}</h6>
+          <Link href={`/profile/${item.email}`} className="font-medium text-xs">
+            {item.email}
+          </Link>
         </div>
         <Link
           href={`/code/${item._id}`}

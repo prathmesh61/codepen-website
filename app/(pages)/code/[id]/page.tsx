@@ -1,5 +1,8 @@
 "use client";
 
+type Props = {
+  params: { id: string };
+};
 import Editor from "@/components/Editor";
 import {
   ResizableHandle,
@@ -12,7 +15,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useCallback, useEffect } from "react";
 
-const CodePage = ({ params }: { params: { id: string } }) => {
+const CodePage = ({ params }: Props) => {
   const { css, html, js, updateCss, updateHtml, updatejs } = useStore(
     (state) => state
   );
