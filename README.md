@@ -19,16 +19,16 @@ Playwright: Utilized for end-to-end testing. <br>
 /api/user/[id]: Retrieves user information and all their projects.
 
 # Pages
-Code Page: A page where users can share their saved code snippets with friends.
-Editor Page: Allows users to write and edit their code snippets using the CodeMirror editor.
-Profile Page: Every user has their own profile page where they can view their email and all their projects.
+Code Page: A page where users can share their saved code snippets with friends. <br>
+Editor Page: Allows users to write and edit their code snippets using the CodeMirror editor. <br>
+Profile Page: Every user has their own profile page where they can view their email and all their projects. <br>
 
 # Getting Started
-Clone the repository.
-Install dependencies using npm install.
-Configure MongoDB connection.
-Run the application using npm run dev.
-Access the application through the specified port.
+Clone the repository. <br>
+Install dependencies using npm install. <br>
+Configure MongoDB connection. <br>
+Run the application using npm run dev. <br>
+Access the application through the specified port. <br>
 
 # Contributing
 Contributions are welcome! Please follow the contribution guidelines outlined in CONTRIBUTING.md.
