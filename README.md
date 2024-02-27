@@ -1,35 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+CodeEdii - code editor like codepen
 
-## Getting Started
+Description: This project is a web application similar to JSFiddle where users can write, save, and share code snippets with their friends. It allows users to create, edit, save, and delete their code snippets. Additionally, users have their own profile pages where they can view their email and all their projects.
 
-First, run the development server:
+Tech Stack
+Next.js: Used for server-side rendering and client-side routing.
+MongoDB: Database for storing user information and code snippets.
+CodeMirror: Provides the code editor functionality.
+Axios: Handles HTTP requests.
+Zustand: State management library.
+TypeScript: Programming language for type safety and enhanced developer experience.
+Playwright: Utilized for end-to-end testing.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+API Endpoints
+/api/save-code: Endpoint for saving code snippets.
+/api/all-repos: Retrieves all projects from the database.
+/api/delete-code: Deletes a code snippet.
+/api/share-code: Generates a project page that can be shared with friends.
+/api/user/[id]: Retrieves user information and all their projects.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Pages
+Code Page: A page where users can share their saved code snippets with friends.
+Editor Page: Allows users to write and edit their code snippets using the CodeMirror editor.
+Profile Page: Every user has their own profile page where they can view their email and all their projects.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Getting Started
+Clone the repository.
+Install dependencies using npm install.
+Configure MongoDB connection.
+Run the application using npm run dev.
+Access the application through the specified port.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
+Contributing
+Contributions are welcome! Please follow the contribution guidelines outlined in CONTRIBUTING.md.
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
