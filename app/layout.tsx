@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Montserrat } from "next/font/google";
-
+import { Toaster } from "react-hot-toast";
 const font = Montserrat({
   weight: "500",
   preload: false,
@@ -22,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider>
-        <body className={font.className}>{children}</body>
+        <body className={font.className}>
+          {children}
+          <Toaster />
+        </body>
       </ClerkProvider>
     </html>
   );

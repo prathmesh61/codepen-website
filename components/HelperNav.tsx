@@ -3,9 +3,11 @@ import { useStore } from "@/store/store";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import React, { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
+import toast from "react-hot-toast";
+import { CheckCheck, XCircle } from "lucide-react";
 const HelperNav: React.FC = () => {
   const { user } = useUser();
   const [projectName, setProjectName] = useState<string>("");
@@ -28,10 +30,33 @@ const HelperNav: React.FC = () => {
           js,
         },
       });
+      toast.success("Code saved!", {
+        icon: (
+          <CheckCheck
+            className="bg-green-500 text-white p-1 rounded-full"
+            color="white"
+            width={20}
+            height={20}
+          />
+        ),
+      });
       setLoading(false);
       router.push("/");
       router.refresh();
     } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log("error on Axios saveCode", error.message);
+      }
+      toast.error("Could not save.", {
+        icon: (
+          <XCircle
+            className="bg-red-500 text-white p-1 rounded-full"
+            color="white"
+            width={20}
+            height={20}
+          />
+        ),
+      });
       console.log("Error white saving code", error);
       setLoading(false);
     } finally {

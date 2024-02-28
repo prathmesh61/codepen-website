@@ -1,5 +1,5 @@
 import { UserData } from "@/lib/types";
-import { Code, Link2 } from "lucide-react";
+import { CheckCheck, Code, Link2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import {
@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import { PORT } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 type Props = {
   item: UserData;
 };
@@ -22,8 +24,21 @@ const Card = ({ item }: Props) => {
     try {
       await fetch(`${PORT}/api/delete-code/${item._id}`, { method: "DELETE" });
       revalidatePath("/");
+      toast.success("successfully deleted", {
+        icon: (
+          <CheckCheck
+            className="bg-green-500 text-white p-1 rounded-full"
+            color="white"
+            width={20}
+            height={20}
+          />
+        ),
+      });
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        console.log("error on Axios handleDelete", error.message);
+      }
+      console.log("error on server handleDelete", error);
     }
   }
   return (
