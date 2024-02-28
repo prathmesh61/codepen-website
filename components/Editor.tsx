@@ -13,9 +13,12 @@ type Props = {
   onChange: (val: string) => void;
 };
 const Editor = ({ displayName, language, onChange, value }: Props) => {
-  const handleChange = useCallback((val: string) => {
-    onChange(val);
-  }, []);
+  const handleChange = useCallback(
+    (val: string) => {
+      onChange(val);
+    },
+    [onChange]
+  );
   const color =
     (displayName === "HTML" && "bg-orange-400 text-black p-1") ||
     (displayName === "CSS" && "bg-blue-400 text-black p-1") ||
