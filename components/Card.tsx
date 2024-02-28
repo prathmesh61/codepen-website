@@ -1,3 +1,4 @@
+"use client";
 import { UserData } from "@/lib/types";
 import { CheckCheck, Code, Link2 } from "lucide-react";
 import Link from "next/link";
@@ -10,21 +11,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { PORT } from "@/lib/utils";
-import { revalidatePath } from "next/cache";
+
 import toast from "react-hot-toast";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 type Props = {
   item: UserData;
 };
 
 const Card = ({ item }: Props) => {
+  const router = useRouter();
   async function handleDelete() {
-    "use server";
     try {
-      await fetch(`${PORT}/api/delete-code/${item._id}`, { method: "DELETE" });
-      revalidatePath("/");
-      toast.success("successfully deleted", {
+      const { data } = await axios.delete(`/api/delete-code/${item._id}`);
+      toast.success(data, {
         icon: (
           <CheckCheck
             className="bg-green-500 text-white p-1 rounded-full"
@@ -34,6 +34,7 @@ const Card = ({ item }: Props) => {
           />
         ),
       });
+      router.push("/message");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log("error on Axios handleDelete", error.message);
@@ -72,14 +73,13 @@ const Card = ({ item }: Props) => {
               This will permanently delete your data from our servers.
             </DialogDescription>
           </DialogHeader>
-          <form action={handleDelete}>
-            <button
-              className="bg-red-500 text-white rounded-lg text-sm w-fit px-2 py-1"
-              type="submit"
-            >
-              delete
-            </button>
-          </form>
+
+          <button
+            className="bg-red-500 text-white rounded-lg text-sm w-fit px-2 py-1"
+            onClick={handleDelete}
+          >
+            delete
+          </button>
         </DialogContent>
       </Dialog>
     </div>

@@ -13,4 +13,4 @@ export const langBgColor = (displayName: string) => {
   );
 };
 
-export const PORT = "http://localhost:3007";
+export const PORT = process.env.PORT_URL || "http://localhost:3007";

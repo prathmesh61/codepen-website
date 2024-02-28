@@ -36,7 +36,7 @@ export async function getAllProjects() {
     return data;
   } catch (error: any) {
     if (error instanceof AxiosError) {
-      console.log("error on Axios getAllProjects", error.message);
+      console.log("error on Axios getAllProjects", error.response);
     }
     console.log("error on getAllProjects", error);
   }

@@ -10,8 +10,8 @@ export const DELETE = async (
 ) => {
   try {
     connection();
-    const data = await Code.findByIdAndDelete(params.id);
-    return NextResponse.json("successfully delete", { status: 500 });
+    await Code.findByIdAndDelete(params.id);
+    return NextResponse.json("successfully delete", { status: 200 });
   } catch (error) {
     console.log("error on delete code", error);
     return NextResponse.json("failed to delete code", { status: 500 });
