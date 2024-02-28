@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 const Navbar: React.FC = () => {
+  const { user } = useUser();
   return (
     <nav className="h-[50px] max-w-screen-xl mx-auto flex justify-between items-center shadow-lg">
       <Link
@@ -18,7 +21,16 @@ const Navbar: React.FC = () => {
           Compiler
         </Link>
         <div className="flex items-center gap-2">
-          <UserButton afterSignOutUrl="/sign-in" />
+          {user ? (
+            <UserButton afterSignOutUrl="/sign-in" />
+          ) : (
+            <Link
+              href={"/sign-up"}
+              className="font-medium text-xs bg-black text-white px-4 py-1 rounded-lg border-2 border-gray-400"
+            >
+              sign up
+            </Link>
+          )}
         </div>
       </div>
     </nav>

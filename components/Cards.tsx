@@ -12,7 +12,7 @@ const Cards = () => {
     async function getAllProjects() {
       setLoading(true);
       try {
-        const response = await fetch(`/api/all-repos`);
+        const response = await fetch(`/api/all-repos`, { cache: "no-cache" });
         const data = await response.json();
         setData(data);
       } catch (error: any) {
