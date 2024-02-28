@@ -1,24 +1,27 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Card from "./Card";
 import { UserData } from "@/lib/types";
 import Loader from "./Loader";
-import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Cards = () => {
   const [data, setData] = useState<UserData[] | null>();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const getAllProjects = async () => {
       setLoading(true);
       try {
-        const { data } = await axios(`/api/all-repos`);
+        const res = await fetch(`/api/all-repos`, { cache: "no-cache" });
+        const data = await res.json();
         setData(data);
       } catch (error: any) {
         console.log("error on getAllProjects", error);
       } finally {
         setLoading(false);
+        router.refresh();
       }
     };
     getAllProjects();
