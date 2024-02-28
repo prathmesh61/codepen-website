@@ -22,7 +22,7 @@ const Cards = () => {
       }
     };
     getAllProjects();
-  }, [data]);
+  }, []);
 
   return (
     <div className="flex flex-wrap items-center justify-center w-full h-fit gap-4">
