@@ -1,4 +1,3 @@
-import { Facebook, Instagram, Twitter } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { UserButton } from "@clerk/nextjs";
@@ -19,10 +18,7 @@ const Navbar: React.FC = () => {
           Compiler
         </Link>
         <div className="flex items-center gap-2">
-          {/* <Facebook width={20} height={20} />
-          <Twitter width={20} height={20} />
-          <Instagram width={20} height={20} /> */}
-          <UserButton />
+          <UserButton afterSignOutUrl="/sign-in" />
         </div>
       </div>
     </nav>
