@@ -1,35 +1,19 @@
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import React from "react";
 import Card from "./Card";
-import { UserData } from "@/lib/types";
 import Loader from "./Loader";
-import { useRouter } from "next/navigation";
-
+import { useQuery } from "@tanstack/react-query";
+import { getAllProjects } from "@/lib/api-requests";
 const Cards = () => {
-  const [data, setData] = useState<UserData[] | null>();
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    const getAllProjects = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/all-repos`, { cache: "no-cache" });
-        const data = await res.json();
-        setData(data);
-      } catch (error: any) {
-        console.log("error on getAllProjects", error);
-      } finally {
-        setLoading(false);
-        router.refresh();
-      }
-    };
-    getAllProjects();
-  }, []);
+  const { data, isLoading } = useQuery({
+    queryKey: ["projects"],
+    queryFn: getAllProjects,
+    staleTime: 2 * 1000,
+  });
 
   return (
     <div className="flex flex-wrap items-center justify-center w-full h-fit gap-4">
-      {loading ? (
+      {isLoading ? (
         <Loader />
       ) : (
         data?.map((item) => <Card item={item} key={item.projectName} />)

@@ -3,6 +3,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Montserrat } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 const font = Montserrat({
   weight: "500",
   preload: false,
@@ -13,7 +14,6 @@ export const metadata: Metadata = {
   description:
     "The best place to build, test, and discover front-end code. CodePen is a social development environment for front-end designers and developers.",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <ClerkProvider>
         <body className={font.className}>
-          {children}
+          <ReactQueryProvider>{children}</ReactQueryProvider>
           <Toaster />
         </body>
       </ClerkProvider>

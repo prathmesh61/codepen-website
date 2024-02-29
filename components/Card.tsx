@@ -1,6 +1,6 @@
 "use client";
 import { UserData } from "@/lib/types";
-import { CheckCheck, Code, Link2 } from "lucide-react";
+import { CheckCheck, Code, Link2, XCircle } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import {
@@ -13,18 +13,18 @@ import {
 } from "@/components/ui/dialog";
 
 import toast from "react-hot-toast";
-import axios, { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { handleDelete } from "@/lib/api-requests";
 type Props = {
   item: UserData;
 };
 
 const Card = ({ item }: Props) => {
-  const router = useRouter();
-  async function handleDelete() {
-    try {
-      const { data } = await axios.delete(`/api/delete-code/${item._id}`);
-      toast.success(data, {
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useMutation({
+    mutationFn: handleDelete,
+    onSuccess: () => {
+      toast.success("deleted successfully.", {
         icon: (
           <CheckCheck
             className="bg-green-500 text-white p-1 rounded-full"
@@ -34,14 +34,26 @@ const Card = ({ item }: Props) => {
           />
         ),
       });
-      router.push("/message");
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log("error on Axios handleDelete", error.message);
-      }
-      console.log("error on server handleDelete", error);
-    }
-  }
+      queryClient.invalidateQueries({ queryKey: ["projects"], exact: true });
+    },
+    onError: (error) => {
+      console.error("Error deleting item:", error);
+      toast.error("try again later.", {
+        icon: (
+          <XCircle
+            className="bg-red-500 text-white p-1 rounded-full"
+            color="white"
+            width={20}
+            height={20}
+          />
+        ),
+      });
+    },
+  });
+  const handleDeleteClick = (itemId: string) => {
+    mutate(itemId);
+  };
+
   return (
     <div className="w-full h-[100px] md:w-[350px] bg-[#272931] my-8">
       <span className="font-bold bg-[#3c3e4b] text-white/45 px-4 text-sm flex items-center gap-2">
@@ -76,7 +88,8 @@ const Card = ({ item }: Props) => {
 
           <button
             className="bg-red-500 text-white rounded-lg text-sm w-fit px-2 py-1"
-            onClick={handleDelete}
+            onClick={() => handleDeleteClick(item._id)}
+            disabled={isPending}
           >
             delete
           </button>
