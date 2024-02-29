@@ -7,12 +7,12 @@ export default authMiddleware({
     "/sign-in",
     "/sign-up",
     "/editor",
+    "/api/all-repos",
+    "/api/save-code",
     "/api/share-code/:id",
     "/api/user-repo/:email",
     "/api/delete-code/:id",
     "/code/:id",
-    "/api/all-repos",
-    "/api/save-code",
   ],
 });
 

@@ -21,7 +21,7 @@ const HelperNav: React.FC = () => {
       return alert("Project name is required");
     }
     try {
-      await axios.post("/api/save-code", {
+      await axios.post("/api/code", {
         email,
         projectName,
         fullCode: {
